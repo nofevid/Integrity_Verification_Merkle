@@ -80,15 +80,15 @@ def main(argv):
 	try:
 		opts, args = getopt.getopt(argv, "hmva:f:d:p:", ["algorithm", "files", "directory", "proof"])
 	except getopt.GetoptError:
-		print("merkle_verify.py -m[-f <files list>, -d <directory>] -a <algorithm>\n")
-		print("merkle_verify.py -v[-f <files list>, -d <directory>] -p <proof>\n")
+		print("merkle_verify.py -m [-f <files list>| -d <directory>] [-a <algorithm>]\n")
+		print("merkle_verify.py -v [-f <files list>| -d <directory>] -p <proof>\n")
 		print("available algorithms:\n", hashlib.algorithms_available)
 		sys.exit()
 
 	for opt, arg in opts:
 		if opt == "-h":
-			print("merkle_verify.py -m[-f <files list>, -d <directory>] -a <algorithm>\n")
-			print("merkle_verify.py -v[-f <files list>, -d <directory>] -p <proof>\n")
+			print("merkle_verify.py -m [-f <files list>| -d <directory>] [-a <algorithm>]\n")
+			print("merkle_verify.py -v [-f <files list>| -d <directory>] -p <proof>\n")
 			print("available algorithms:\n", hashlib.algorithms_available)
 			sys.exit()
 		elif opt == "-m":
