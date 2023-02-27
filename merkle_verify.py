@@ -22,7 +22,7 @@ def hash_file(filename, alg):
 	return hasher.hexdigest()
 
 
-# 递归构造 Merkle Hash 树
+# 递归构造 Merkle Tree
 def build_merkle_tree(file_list_b, alg_b):
 	if len(file_list_b) == 0:                           # 文件列表为空，退出
 		print("fileListError")
