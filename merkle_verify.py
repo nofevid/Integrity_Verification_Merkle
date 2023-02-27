@@ -13,7 +13,7 @@ import pickle
 
 # 计算文件的哈希值
 def hash_file(filename, alg):
-	hasher = hashlib.new(alg)                   # 根据输入的算法求哈希值
+	hasher = hashlib.new(alg)                           # 根据输入的算法求哈希值
 	with open(filename, 'rb') as f_h:
 		buffer = f_h.read(65536)                        # 按 65536 字节读入，防止大文件爆内存
 		while len(buffer) > 0:
