@@ -61,7 +61,6 @@ def verify_file_integrity(root_hash_v, file_list_v, alg_v, public_key_v, signatu
 	digest = MD5.new(root_hash_v.encode('utf-8'))
 	public_key = RSA.importKey(public_key_v)            # 导入公钥
 	pk = PKCS1_v1_5.new(public_key)
-	cipher = PKCS1_OAEP.new(public_key)
 	if pk.verify(digest, signature_v):                  # 验证签名
 		merkle_tree_root = build_merkle_tree(file_list_v, alg_v)
 		if merkle_tree_root == root_hash_v:             # 验证 Merkle 根
@@ -81,14 +80,14 @@ def main(argv):
 	try:
 		opts, args = getopt.getopt(argv, "hmva:f:d:p:", ["algorithm", "files", "directory", "proof"])
 	except getopt.GetoptError:
-		print("merkle_verify.py -m[-f <files list>, -d <directory>]\n")
+		print("merkle_verify.py -m[-f <files list>, -d <directory>] -a <algorithm>\n")
 		print("merkle_verify.py -v[-f <files list>, -d <directory>] -p <proof>\n")
 		print("available algorithms:\n", hashlib.algorithms_available)
 		sys.exit()
 
 	for opt, arg in opts:
 		if opt == "-h":
-			print("merkle_verify.py -m[-f <files list>, -d <directory>]\n")
+			print("merkle_verify.py -m[-f <files list>, -d <directory>] -a <algorithm>\n")
 			print("merkle_verify.py -v[-f <files list>, -d <directory>] -p <proof>\n")
 			print("available algorithms:\n", hashlib.algorithms_available)
 			sys.exit()
@@ -137,3 +136,12 @@ def main(argv):
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
+
+# python merkle_verify.py -m -f file1.txt
+# python merkle_verify.py -v -f file1.txt -p proof.sha256
+#
+# python merkle_verify.py -m -f file1.txt,file2.txt,file3.txt
+#
+# python merkle_verify.py -m -d dir_1 -a md5
+# python merkle_verify.py -v -d dir_1 -p proof.md5
+
