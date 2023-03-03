@@ -144,4 +144,3 @@ if __name__ == "__main__":
 #
 # python merkle_verify.py -m -d dir_1 -a md5
 # python merkle_verify.py -v -d dir_1 -p proof.md5
-
